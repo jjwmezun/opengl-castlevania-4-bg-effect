@@ -1,0 +1,21 @@
+cmake_minimum_required(VERSION 3.2)
+
+project(CV4)
+set(OpenGL_GL_PREFERENCE "GLVND")
+add_executable(CV4
+    main.c
+)
+set_property(TARGET CV4 PROPERTY C_STANDARD 23)
+target_link_libraries(CV4 m)
+find_package(OpenGL REQUIRED)
+find_package(GLEW REQUIRED)
+find_package(SDL2 REQUIRED)
+include_directories(${OPENGL_INCLUDE_DIRS})
+find_path(GLEW_INCLUDE_DIR GL/glew.h)
+find_path(GLU_INCLUDE_DIR GL/glu.h)
+include_directories(${SDL2_INCLUDE_DIRS})
+include_directories(include include)
+target_link_libraries(CV4 ${OPENGL_LIBRARIES})
+target_link_libraries(CV4 ${GLEW_LIBRARIES})
+target_link_libraries(CV4 SDL2)
+file(COPY ${CMAKE_CURRENT_LIST_DIR}/assets DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
